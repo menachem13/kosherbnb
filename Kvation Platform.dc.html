@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/classical-fefb82d7-7198-48b8-9dfe-36ef5e760652/styles.css">
+<script src="_ds/classical-fefb82d7-7198-48b8-9dfe-36ef5e760652/_ds_bundle.js"></script>
+<script src="./image-slot.js"></script>
+<style>
+  body { margin: 0; }
+  a { color: var(--color-accent-700); text-decoration: none; }
+  a:hover { color: var(--color-accent-600); text-decoration: underline; }
+  .lcard:hover .lshot { filter: brightness(0.94); }
+  .seg-opt { white-space: nowrap; }
+  .tag { white-space: nowrap; }
+  .btn { white-space: nowrap; }
+</style>
+</helmet>
+
+<div style="min-height:100vh;background:var(--color-neutral-300);padding-bottom:32px">
+
+  <div style="position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:var(--space-3);flex-wrap:wrap;padding:6px var(--space-4);background:var(--color-neutral-900);color:var(--color-neutral-100)">
+    <span style="font-family:var(--font-heading);font-size:13px;opacity:0.65;margin-right:var(--space-2)">Prototype</span>
+    <div style="display:flex;flex-wrap:wrap;gap:2px">
+      <sc-for list="{{ navScreens }}" as="s" hint-placeholder-count="9">
+        <button type="button" onClick="{{ s.select }}" style="{{ s.style }}">{{ s.label }}</button>
+      </sc-for>
+    </div>
+    <div style="margin-left:auto;display:flex;gap:2px">
+      <sc-for list="{{ viewports }}" as="v" hint-placeholder-count="2">
+        <button type="button" onClick="{{ v.select }}" style="{{ v.style }}">{{ v.label }}</button>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="{{ frameStyle }}">
+
+    <!-- ══ utility strip ══ -->
+    <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex;align-items:center;gap:var(--space-4);padding:5px var(--space-6);background:var(--color-neutral-200);border-bottom:1px solid var(--color-divider);font-size:11px;color:var(--color-neutral-700)">
+        <span>Sullivan County · Rockland · South Florida · Deal</span>
+        <div style="margin-left:auto;display:flex;gap:var(--space-4)">
+          <a href="#">Help</a><a href="#">Gift cards</a><a href="#">+1 (845) 555-0142</a>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ══ app header ══ -->
+    <div class="nav" style="{{ headerStyle }}">
+      <span class="nav-brand" onClick="{{ goHome }}" style="font-size:22px;letter-spacing:0.01em;cursor:pointer;line-height:1;margin-right:0">Kvation</span>
+      <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;align-items:center;gap:var(--space-4);font-size:13px;margin-left:var(--space-4);white-space:nowrap">
+          <a href="#" onClick="{{ goSearch }}">Rentals</a>
+          <a href="#">Retreats</a>
+          <a href="#">Group It</a>
+          <a href="#">Catering</a>
+          <a href="#">Articles</a>
+        </div>
+      </sc-if>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:var(--space-3);flex:none;white-space:nowrap">
+        <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+          <a href="#" onClick="{{ goHost }}" style="font-size:13px;white-space:nowrap">List a property</a>
+        </sc-if>
+        <button type="button" class="btn btn-secondary" onClick="{{ goHost }}" style="font-size:13px;padding:7px 14px;white-space:nowrap;flex:none">Sign in</button>
+      </div>
+    </div>
+
+    <!-- ══ compact search bar on inner screens ══ -->
+    <sc-if value="{{ showBar }}" hint-placeholder-val="{{ false }}">
+      <div style="{{ stickyBarStyle }}">
+        <div style="{{ searchBarGrid2 }}">
+          <input class="input" value="Catskills | Sullivan County" readOnly="{{ true }}" style="height:38px">
+          <input class="input" value="Jan 12 — Jan 15" readOnly="{{ true }}" style="height:38px">
+          <input class="input" value="18 guests" readOnly="{{ true }}" style="height:38px">
+          <button type="button" class="btn btn-primary" onClick="{{ goSearch }}" style="height:38px;padding:0 20px">Search</button>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ══════════════════ HOME ══════════════════ -->
+    <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+      <div>
+        <div style="{{ heroWrap }}">
+          <div class="plate" style="{{ heroShot }}">
+            <image-slot id="kv-hero" src="photos/kv-hero.jpg" style="position:absolute;inset:0;width:100%;height:100%" shape="rect" fit="cover" placeholder="Drop the hero photo — lakefront villa, late afternoon"></image-slot>
+            <div style="{{ heroScrim }}"></div>
+          </div>
+          <div style="{{ heroInner }}">
+            <h1 style="{{ heroTitle }}">Kosher rentals near shuls and mikvaos.</h1>
+            <p style="{{ heroSub }}">Search by availability and location. Instantly book.</p>
+            <div style="{{ heroSearchCard }}">
+              <div style="{{ heroSearchGrid }}">
+                <div class="field"><label>Where</label><input class="input" value="Catskills | Sullivan County" readOnly="{{ true }}" style="height:40px"></div>
+                <div class="field"><label>Arrive</label><input class="input" value="Thu, Jan 12" readOnly="{{ true }}" style="height:40px"></div>
+                <div class="field"><label>Depart</label><input class="input" value="Sun, Jan 15" readOnly="{{ true }}" style="height:40px"></div>
+                <div class="field"><label>Guests</label><input class="input" value="18 guests" readOnly="{{ true }}" style="height:40px"></div>
+                <button type="button" class="btn btn-primary" onClick="{{ goSearch }}" style="{{ heroSearchBtn }}">Search</button>
+              </div>
+              <div style="display:flex;flex-wrap:wrap;gap:6px;padding-top:var(--space-2);margin-top:var(--space-1);border-top:1px solid var(--color-divider)">
+                <span style="font-size:11px;color:var(--color-neutral-600);align-self:center;margin-right:2px">Popular:</span>
+                <sc-for list="{{ quickFilters }}" as="q" hint-placeholder-count="5">
+                  <a href="#" onClick="{{ goSearch }}" class="tag tag-outline" style="font-size:11px;padding:3px 9px">{{ q }}</a>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="{{ trustStrip }}">
+          <sc-for list="{{ trust }}" as="t" hint-placeholder-count="4">
+            <div style="display:flex;flex-direction:column;gap:2px">
+              <span style="font-family:var(--font-heading);font-size:21px;line-height:1.1;font-variant-numeric:tabular-nums">{{ t.value }}</span>
+              <span style="font-size:11px;color:var(--color-neutral-700)">{{ t.label }}</span>
+            </div>
+          </sc-for>
+        </div>
+
+        <section style="{{ padX }}">
+          <div style="{{ rowHead }}">
+            <h2 style="{{ h2 }}">Instantly bookable this winter</h2>
+            <a href="#" onClick="{{ goSearch }}" style="font-size:12px;white-space:nowrap">All 412 rentals →</a>
+          </div>
+          <div style="{{ featuredGrid }}">
+            <sc-for list="{{ featured }}" as="p" hint-placeholder-count="8">
+              <div class="lcard" onClick="{{ p.open }}" style="cursor:pointer;display:flex;flex-direction:column;gap:8px">
+                <div class="lshot" style="{{ p.shot }}">
+                  <image-slot id="{{ p.slotId }}" src="{{ p.photo }}" style="position:absolute;inset:0;width:100%;height:100%" shape="rounded" radius="4" fit="cover" placeholder="{{ p.slotHint }}"></image-slot>
+                  <span style="{{ p.badgeStyle }}">{{ p.badge }}</span>
+                  <span style="position:absolute;top:7px;right:7px;width:26px;height:26px;display:grid;place-items:center;border-radius:50%;background:rgba(243,242,242,0.9)">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--color-neutral-800)" stroke-width="1.8"><path d="M20.8 5.6a5 5 0 0 0-7.1 0L12 7.3l-1.7-1.7a5 5 0 1 0-7.1 7.1l8.8 8.8 8.8-8.8a5 5 0 0 0 0-7.1z"/></svg>
+                  </span>
+                </div>
+                <div style="display:flex;justify-content:space-between;gap:var(--space-2);align-items:baseline">
+                  <span style="font-size:11px;color:var(--color-neutral-700);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ p.town }}</span>
+                  <span style="font-size:11px;color:var(--color-neutral-700);font-variant-numeric:tabular-nums;white-space:nowrap">{{ p.ratingLabel }}</span>
+                </div>
+                <div style="font-family:var(--font-heading);font-size:17px;line-height:1.2">{{ p.name }}</div>
+                <div style="font-size:11px;color:var(--color-neutral-700);font-variant-numeric:tabular-nums">{{ p.figures }}</div>
+                <div style="font-size:13px;font-variant-numeric:tabular-nums"><strong style="font-weight:600">{{ p.price }}</strong> <span style="color:var(--color-neutral-700)">night</span></div>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+
+        <section style="{{ padX }}">
+          <div style="{{ rowHead }}">
+            <h2 style="{{ h2 }}">Browse by location</h2>
+          </div>
+          <div style="{{ tileGrid }}">
+            <sc-for list="{{ locations }}" as="l" hint-placeholder-count="6">
+              <div onClick="{{ goSearch }}" style="cursor:pointer;position:relative;border-radius:var(--radius-sm);overflow:hidden;background:var(--color-neutral-400);aspect-ratio:3/2;display:flex;align-items:flex-end;padding:10px">
+                <image-slot id="{{ l.slotId }}" src="{{ l.photo }}" style="position:absolute;inset:0;width:100%;height:100%" shape="rect" fit="cover" placeholder="{{ l.name }} photo"></image-slot>
+                <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(to top,rgba(32,31,29,0.72),rgba(32,31,29,0.05))"></div>
+                <div style="position:relative">
+                  <div style="font-family:var(--font-heading);font-size:16px;color:var(--color-neutral-100);line-height:1.2">{{ l.name }}</div>
+                  <div style="font-size:11px;color:rgba(243,242,242,0.75);font-variant-numeric:tabular-nums">{{ l.count }}</div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+
+        <section style="{{ padX }}">
+          <hr class="hr" style="margin:var(--space-6) 0 var(--space-4)">
+          <h2 style="{{ h2 }}">What we ask every host before a listing goes live</h2>
+          <div style="{{ threeCol }}">
+            <sc-for list="{{ promises }}" as="p" hint-placeholder-count="3">
+              <div>
+                <div style="font-family:var(--font-heading);font-size:17px;margin-bottom:7px;padding-bottom:7px;border-bottom:1px solid var(--color-accent-300)">{{ p.title }}</div>
+                <p style="text-align:justify;hyphens:auto;font-size:13px;line-height:1.6;color:var(--color-neutral-800);margin:0">{{ p.body }}</p>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+
+        <section style="{{ padX }}">
+          <hr class="hr" style="margin:var(--space-6) 0 var(--space-4)">
+          <div style="{{ twoColWide }}">
+            <div>
+              <h2 style="{{ h2 }}">Recent guest reviews</h2>
+              <div style="display:flex;flex-direction:column;gap:var(--space-3)">
+                <sc-for list="{{ reviews }}" as="r" hint-placeholder-count="3">
+                  <div style="padding-bottom:var(--space-3);border-bottom:1px solid var(--color-divider)">
+                    <div style="font-size:11px;color:var(--color-accent-700);font-variant-numeric:tabular-nums;margin-bottom:4px">{{ r.rating }} ★</div>
+                    <p style="font-size:13px;line-height:1.6;margin:0 0 5px;font-style:italic">{{ r.text }}</p>
+                    <div style="font-size:11px;color:var(--color-neutral-600)">{{ r.by }}</div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+            <div class="card" style="background:var(--color-bg);gap:var(--space-2);padding:var(--space-4);align-self:start">
+              <div class="card-kicker">For hosts</div>
+              <div style="font-family:var(--font-heading);font-size:21px;line-height:1.2">Your house is empty nine months a year.</div>
+              <p class="card-body" style="font-size:13px;line-height:1.6">List once, record your kashrus details, take instant bookings from families who already know what they need. No listing fee.</p>
+              <button type="button" class="btn btn-primary" onClick="{{ goHost }}" style="align-self:flex-start">List your property</button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </sc-if>
+
+    <!-- ══════════════════ SEARCH ══════════════════ -->
+    <sc-if value="{{ isSearch }}" hint-placeholder-val="{{ false }}">
+      <div>
+        <div style="{{ padX }}">
+          <div style="padding:var(--space-3) 0 0;font-size:11px;color:var(--color-neutral-600)">Home » Listings » United States » New York » Catskills | Sullivan County</div>
+        </div>
+        <div style="{{ searchLayout }}">
+          <aside style="{{ filterRail }}">
+            <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+              <button type="button" class="btn btn-secondary btn-block" style="min-height:44px">Filters · 4 applied</button>
+            </sc-if>
+            <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+              <div style="display:flex;flex-direction:column;gap:var(--space-3);font-size:13px">
+                <div style="border:1px solid var(--color-divider);border-radius:var(--radius-sm);overflow:hidden;background:var(--color-neutral-200)">
+                  <div style="position:relative;height:132px;display:grid;place-items:center">
+                    <span style="font-family:var(--font-heading);font-style:italic;font-size:11px;color:var(--color-neutral-600)">Map — 36 rentals</span>
+                    <sc-for list="{{ pins }}" as="pin" hint-placeholder-count="6">
+                      <span style="{{ pin.style }}">{{ pin.label }}</span>
+                    </sc-for>
+                  </div>
+                  <button type="button" class="btn btn-ghost" style="width:100%;border-top:1px solid var(--color-divider);border-radius:0;font-size:11px;padding:6px">Show eruv &amp; shuls on map</button>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:baseline">
+                  <h6 style="margin:0">Filters</h6>
+                  <a href="#" style="font-size:11px">Clear all</a>
+                </div>
+                <hr class="hr" style="margin:0">
+                <div>
+                  <div style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-neutral-600);margin-bottom:7px">Price per night</div>
+                  <div style="display:flex;gap:7px">
+                    <input class="input" value="$250" readOnly="{{ true }}" style="height:34px;font-size:12px">
+                    <input class="input" value="$2,600" readOnly="{{ true }}" style="height:34px;font-size:12px">
+                  </div>
+                </div>
+                <hr class="hr" style="margin:0">
+                <div>
+                  <div style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-neutral-600);margin-bottom:7px">Property type</div>
+                  <div style="display:flex;flex-direction:column;gap:6px">
+                    <label class="radio"><input type="radio" name="ptype" defaultChecked="{{ true }}"><span class="dot"></span>Any</label>
+                    <label class="radio"><input type="radio" name="ptype"><span class="dot"></span>House</label>
+                    <label class="radio"><input type="radio" name="ptype"><span class="dot"></span>Group It — multiple units</label>
+                    <label class="radio"><input type="radio" name="ptype"><span class="dot"></span>Retreat / camp</label>
+                  </div>
+                </div>
+                <hr class="hr" style="margin:0">
+                <div style="{{ kosherFilterStyle }}">
+                  <div style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-accent-800);margin-bottom:7px">Kosher &amp; Shabbos</div>
+                  <div style="display:flex;flex-direction:column;gap:6px;font-size:12px">
+                    <sc-for list="{{ kosherFilters }}" as="f" hint-placeholder-count="8">
+                      <label style="display:flex;align-items:center;gap:7px;cursor:pointer">
+                        <input type="checkbox" defaultChecked="{{ f.on }}" style="accent-color:var(--color-accent-600);width:14px;height:14px">
+                        <span>{{ f.label }}</span>
+                      </label>
+                    </sc-for>
+                  </div>
+                </div>
+                <hr class="hr" style="margin:0">
+                <div>
+                  <div style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-neutral-600);margin-bottom:7px">Bedrooms</div>
+                  <div class="seg"><label class="seg-opt"><input type="radio" name="bd" defaultChecked="{{ true }}">Any</label><label class="seg-opt"><input type="radio" name="bd">4+</label><label class="seg-opt"><input type="radio" name="bd">6+</label><label class="seg-opt"><input type="radio" name="bd">9+</label></div>
+                </div>
+                <hr class="hr" style="margin:0">
+                <div>
+                  <div style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-neutral-600);margin-bottom:7px">Amenities</div>
+                  <div style="display:flex;flex-wrap:wrap;gap:5px">
+                    <span class="tag tag-outline" style="font-size:11px;white-space:nowrap">Heated pool</span>
+                    <span class="tag tag-outline" style="font-size:11px;white-space:nowrap">Hot tub</span>
+                    <span class="tag tag-outline" style="font-size:11px;white-space:nowrap">Sauna</span>
+                    <span class="tag tag-outline" style="font-size:11px;white-space:nowrap">Lakefront</span>
+                    <span class="tag tag-outline" style="font-size:11px;white-space:nowrap">Playground</span>
+                  </div>
+                </div>
+              </div>
+            </sc-if>
+          </aside>
+
+          <div style="min-width:0">
+            <div style="padding-bottom:var(--space-2)">
+              <h1 style="{{ h1Search }}">Catskills | Sullivan County</h1>
+              <p style="font-size:12px;color:var(--color-neutral-700);margin:4px 0 0;max-width:70ch">Kosher luxury villas, mansions and vacation rentals near shuls and mikvaos.</p>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:var(--space-3);flex-wrap:wrap;padding:var(--space-2) 0;border-top:1px solid var(--color-divider);border-bottom:1px solid var(--color-divider)">
+              <span style="font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:var(--color-neutral-700);font-variant-numeric:tabular-nums">Showing 1–12 of 36</span>
+              <div class="seg" style="font-size:12px">
+                <label class="seg-opt"><input type="radio" name="sort" defaultChecked="{{ true }}">Recommended</label>
+                <label class="seg-opt"><input type="radio" name="sort">Price</label>
+                <label class="seg-opt"><input type="radio" name="sort">Shul walk</label>
+              </div>
+            </div>
+
+            <div style="{{ resultsGrid }}">
+              <sc-for list="{{ listings }}" as="p" hint-placeholder-count="12">
+                <div class="lcard" onClick="{{ p.open }}" style="cursor:pointer;display:flex;flex-direction:column;gap:7px">
+                  <div class="lshot" style="{{ p.shot }}">
+                    <image-slot id="{{ p.slotId }}" src="{{ p.photo }}" style="position:absolute;inset:0;width:100%;height:100%" shape="rounded" radius="4" fit="cover" placeholder="{{ p.slotHint }}"></image-slot>
+                    <span style="{{ p.badgeStyle }}">{{ p.badge }}</span>
+                    <span style="position:absolute;top:7px;right:7px;width:26px;height:26px;display:grid;place-items:center;border-radius:50%;background:rgba(243,242,242,0.9)">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--color-neutral-800)" stroke-width="1.8"><path d="M20.8 5.6a5 5 0 0 0-7.1 0L12 7.3l-1.7-1.7a5 5 0 1 0-7.1 7.1l8.8 8.8 8.8-8.8a5 5 0 0 0 0-7.1z"/></svg>
+                    </span>
+                  </div>
+                  <div style="display:flex;justify-content:space-between;gap:var(--space-2);align-items:baseline">
+                    <span style="font-size:11px;color:var(--color-neutral-700);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ p.town }}</span>
+                    <span style="font-size:11px;color:var(--color-neutral-700);font-variant-numeric:tabular-nums;white-space:nowrap">{{ p.ratingLabel }}</span>
+                  </div>
+                  <div style="font-family:var(--font-heading);font-size:17px;line-height:1.2">{{ p.name }}</div>
+                  <div style="font-size:11px;color:var(--color-neutral-700);font-variant-numeric:tabular-nums">{{ p.figures }}</div>
+                  <div style="display:flex;flex-wrap:wrap;gap:4px">
+                    <sc-for list="{{ p.tags }}" as="t" hint-placeholder-count="2">
+                      <span class="tag tag-accent" style="font-size:10px;padding:2px 7px">{{ t }}</span>
+                    </sc-for>
+                  </div>
+                  <div style="font-size:13px;font-variant-numeric:tabular-nums"><strong style="font-weight:600">{{ p.price }}</strong> <span style="color:var(--color-neutral-700)">night</span></div>
+                </div>
+              </sc-for>
+            </div>
+
+            <div style="display:flex;align-items:center;justify-content:center;gap:5px;padding:var(--space-6) 0">
+              <sc-for list="{{ pages }}" as="pg" hint-placeholder-count="5">
+                <button type="button" style="{{ pg.style }}">{{ pg.label }}</button>
+              </sc-for>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ══════════════════ PROPERTY ══════════════════ -->
+    <sc-if value="{{ isProperty }}" hint-placeholder-val="{{ false }}">
+      <section style="{{ padX }}">
+        <div style="padding:var(--space-3) 0 var(--space-2);font-size:11px;color:var(--color-neutral-600)"><a href="#" onClick="{{ goSearch }}">Catskills | Sullivan County</a> » Heichal Villa</div>
+
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:var(--space-3);flex-wrap:wrap;padding-bottom:var(--space-3)">
+          <div>
+            <h1 style="{{ h1Prop }}">Heichal Villa</h1>
+            <div style="display:flex;flex-wrap:wrap;gap:var(--space-3);font-size:12px;color:var(--color-neutral-700);font-variant-numeric:tabular-nums;margin-top:5px">
+              <span>4.9 ★ (12 reviews)</span><span>South Fallsburg, NY</span><span>Shul walk 3 min</span><span>Superhost</span>
+            </div>
+          </div>
+          <div style="display:flex;gap:var(--space-2)">
+            <button type="button" class="btn btn-ghost" style="font-size:12px">Share</button>
+            <button type="button" class="btn btn-ghost" style="font-size:12px">Save</button>
+          </div>
+        </div>
+
+        <div style="{{ galleryGrid }}">
+          <div class="plate" style="{{ mainShot }}">
+            <image-slot id="kv-prop-main" src="photos/kv-prop-main.jpg" style="position:absolute;inset:0;width:100%;height:100%" shape="rounded" radius="4" fit="cover" placeholder="Drop the main photo — exterior or great room"></image-slot>
+          </div>
+          <div style="{{ thumbStack }}">
+            <sc-for list="{{ thumbs }}" as="t" hint-placeholder-count="4">
+              <div class="plate" style="position:relative;border-radius:var(--radius-sm);background:var(--color-neutral-400);aspect-ratio:3/2;overflow:hidden">
+                <image-slot id="{{ t.slotId }}" src="{{ t.photo }}" style="position:absolute;inset:0;width:100%;height:100%" shape="rounded" radius="4" fit="cover" placeholder="{{ t.label }}"></image-slot>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="{{ detailLayout }}">
+          <div style="min-width:0">
+            <div style="display:flex;flex-wrap:wrap;gap:var(--space-4);padding:var(--space-4) 0;border-bottom:1px solid var(--color-divider);font-size:13px;font-variant-numeric:tabular-nums">
+              <span>26 guests</span><span>9 bedrooms</span><span>12 beds</span><span>6 bathrooms</span><span>House · 4 acres</span>
+            </div>
+            <p style="text-align:justify;hyphens:auto;font-size:14px;line-height:1.7;margin:var(--space-4) 0 0">A nine-bedroom house on a quiet street three minutes from Heichal Yosef, built for a full family Shabbos rather than a rental turnover. Two complete kitchens, a dining room that seats twenty-six without folding tables, and a heated pool that stays open through Sukkos. The basement holds the game room, the second laundry, and enough seforim that nobody needs to bring their own.</p>
+
+            <div style="{{ kosherPanelStyle }}">
+              <div style="display:flex;align-items:baseline;justify-content:space-between;gap:var(--space-3);flex-wrap:wrap;padding-bottom:var(--space-2);border-bottom:1px solid var(--color-accent-300)">
+                <h3 style="margin:0;font-weight:400;font-size:21px;color:var(--color-accent-900)">Kosher &amp; Shabbos</h3>
+                <span style="font-size:11px;color:var(--color-accent-800);font-variant-numeric:tabular-nums">Verified by host · updated 3 Sep 2026</span>
+              </div>
+              <div style="{{ kosherGrid }}">
+                <sc-for list="{{ kosherFeatures }}" as="k" hint-placeholder-count="8">
+                  <div style="display:flex;gap:8px;align-items:flex-start">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-700)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:3px"><path d="M20 6 9 17l-5-5"/></svg>
+                    <div>
+                      <div style="font-family:var(--font-heading);font-size:15px;line-height:1.2;color:var(--color-accent-900)">{{ k.title }}</div>
+                      <div style="font-size:12px;line-height:1.55;color:var(--color-neutral-800);margin-top:2px">{{ k.detail }}</div>
+                    </div>
+                  </div>
+                </sc-for>
+              </div>
+              <p style="font-size:11px;font-style:italic;color:var(--color-neutral-700);margin:var(--space-3) 0 0;padding-top:var(--space-2);border-top:1px solid var(--color-accent-300)">Kosher verification is between hosts and guests. Kvation doesn't assure kashrus status.</p>
+            </div>
+
+            <div style="padding-top:var(--space-6)">
+              <h3 style="{{ h3 }}">Amenities</h3>
+              <div style="{{ amenityGrid }}">
+                <sc-for list="{{ amenities }}" as="a" hint-placeholder-count="12">
+                  <div style="font-size:13px;padding:7px 0;border-bottom:1px solid var(--color-divider);color:var(--color-neutral-800)">{{ a }}</div>
+                </sc-for>
+              </div>
+            </div>
+
+            <div style="padding-top:var(--space-6)">
+              <h3 style="{{ h3 }}">Sleeping arrangement</h3>
+              <div style="{{ threeCol }}">
+                <sc-for list="{{ rooms }}" as="r" hint-placeholder-count="3">
+                  <div style="border:1px solid var(--color-divider);border-radius:var(--radius-sm);padding:var(--space-3)">
+                    <div style="font-family:var(--font-heading);font-size:15px">{{ r.name }}</div>
+                    <div style="font-size:12px;color:var(--color-neutral-700);margin-top:3px;font-variant-numeric:tabular-nums">{{ r.beds }}</div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+
+            <div style="padding-top:var(--space-6)">
+              <div style="display:flex;align-items:baseline;justify-content:space-between;gap:var(--space-3);flex-wrap:wrap">
+                <h3 style="{{ h3 }}">Reviews</h3>
+                <span style="font-size:12px;color:var(--color-neutral-700);font-variant-numeric:tabular-nums">4.9 ★ · 12 reviews</span>
+              </div>
+              <div style="{{ reviewGrid }}">
+                <sc-for list="{{ reviews }}" as="r" hint-placeholder-count="3">
+                  <div style="border:1px solid var(--color-divider);border-radius:var(--radius-sm);padding:var(--space-3)">
+                    <div style="font-size:11px;color:var(--color-accent-700);font-variant-numeric:tabular-nums;margin-bottom:5px">{{ r.rating }} ★</div>
+                    <p style="font-size:13px;line-height:1.6;font-style:italic;margin:0 0 6px">{{ r.text }}</p>
+                    <div style="font-size:11px;color:var(--color-neutral-600)">{{ r.by }}</div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+
+            <div style="padding:var(--space-6) 0">
+              <h3 style="{{ h3 }}">The neighborhood</h3>
+              <div style="border:1px solid var(--color-divider);border-radius:var(--radius-sm);background:var(--color-neutral-200);height:230px;display:grid;place-items:center">
+                <span style="font-family:var(--font-heading);font-style:italic;font-size:12px;color:var(--color-neutral-600)">Map — eruv boundary, shuls, mikvah</span>
+              </div>
+            </div>
+          </div>
+
+          <aside style="{{ bookingAsideStyle }}">
+            <div class="card elev-sm" style="background:var(--color-bg);padding:var(--space-3);gap:var(--space-2)">
+              <div style="display:flex;align-items:baseline;gap:5px;font-variant-numeric:tabular-nums">
+                <span style="font-family:var(--font-heading);font-size:26px;line-height:1">$1,700</span>
+                <span style="font-size:12px;color:var(--color-neutral-700)">night</span>
+                <span style="margin-left:auto;font-size:11px;color:var(--color-neutral-700)">4.9 ★ (12)</span>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px">
+                <div class="field"><label>Arrive</label><input class="input" value="Thu, Jan 12" readOnly="{{ true }}" style="height:36px;font-size:12px"></div>
+                <div class="field"><label>Depart</label><input class="input" value="Sun, Jan 15" readOnly="{{ true }}" style="height:36px;font-size:12px"></div>
+              </div>
+              <div class="field"><label>Guests</label><input class="input" value="18 guests" readOnly="{{ true }}" style="height:36px;font-size:12px"></div>
+              <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;font-variant-numeric:tabular-nums;padding-top:var(--space-2);border-top:1px solid var(--color-divider)">
+                <div style="display:flex;justify-content:space-between"><span>$1,700 × 3 nights</span><span>$5,100</span></div>
+                <div style="display:flex;justify-content:space-between"><span>Cleaning</span><span>$450</span></div>
+                <div style="display:flex;justify-content:space-between"><span>Service fee</span><span>$306</span></div>
+                <div style="display:flex;justify-content:space-between;padding-top:6px;border-top:1px solid var(--color-divider);font-family:var(--font-heading);font-size:16px"><span>Total</span><span>$5,856</span></div>
+              </div>
+              <button type="button" class="btn btn-primary btn-block" onClick="{{ goBook1 }}" style="min-height:44px">Book instantly</button>
+              <button type="button" class="btn btn-secondary btn-block" style="font-size:12px">Message host</button>
+              <p style="font-size:11px;color:var(--color-neutral-700);margin:0;text-align:center">Free cancellation until 30 Dec</p>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </sc-if>
+
+    <!-- ══════════════════ BOOKING ══════════════════ -->
+    <sc-if value="{{ isBooking }}" hint-placeholder-val="{{ false }}">
+      <section style="{{ padX }}">
+        <div style="max-width:900px;margin:0 auto;padding:var(--space-6) 0">
+          <div style="display:flex;align-items:center;gap:var(--space-2);margin-bottom:var(--space-4)">
+            <sc-for list="{{ bookingSteps }}" as="b" hint-placeholder-count="3">
+              <div style="display:flex;align-items:center;gap:8px;flex:1">
+                <span style="{{ b.circle }}">{{ b.n }}</span>
+                <span style="{{ b.labelStyle }}">{{ b.label }}</span>
+                <span style="{{ b.rule }}"></span>
+              </div>
+            </sc-for>
+          </div>
+
+          <div style="{{ bookingLayout }}">
+            <div class="card" style="background:var(--color-bg);padding:var(--space-6);gap:var(--space-3)">
+
+              <sc-if value="{{ isBook1 }}" hint-placeholder-val="{{ true }}">
+                <div style="display:flex;flex-direction:column;gap:var(--space-3)">
+                  <div>
+                    <div class="card-kicker">Step 1 of 3</div>
+                    <h2 style="{{ h2Form }}">Confirm dates &amp; guests</h2>
+                  </div>
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3)">
+                    <div class="field"><label>Arrive</label><input class="input" value="Thursday, 12 January" readOnly="{{ true }}"></div>
+                    <div class="field"><label>Depart</label><input class="input" value="Sunday, 15 January" readOnly="{{ true }}"></div>
+                    <div class="field"><label>Adults</label><input class="input" value="10" readOnly="{{ true }}"></div>
+                    <div class="field"><label>Children</label><input class="input" value="8" readOnly="{{ true }}"></div>
+                  </div>
+                  <div class="field"><label>Who is the booking for?</label><input class="input" value="Family Shabbos — Weiss / Friedman" readOnly="{{ true }}"></div>
+                  <div class="field"><label>Anything the host should know</label><textarea class="input" rows="3" readOnly="{{ true }}" value="Arriving Thursday evening. We'll need the second kitchen kashered for meat, and the urn filled before Shabbos."></textarea></div>
+                  <label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;cursor:pointer">
+                    <input type="checkbox" defaultChecked="{{ true }}" style="accent-color:var(--color-accent-600);margin-top:3px">
+                    <span>I understand kashrus status is confirmed directly with the host.</span>
+                  </label>
+                  <div style="display:flex;gap:var(--space-2);justify-content:space-between;padding-top:var(--space-2);border-top:1px solid var(--color-divider)">
+                    <button type="button" class="btn btn-secondary" onClick="{{ goProperty }}">Back</button>
+                    <button type="button" class="btn btn-primary" onClick="{{ goBook2 }}" style="min-height:44px">Continue to payment</button>
+                  </div>
+                </div>
+              </sc-if>
+
+              <sc-if value="{{ isBook2 }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;flex-direction:column;gap:var(--space-3)">
+                  <div>
+                    <div class="card-kicker">Step 2 of 3</div>
+                    <h2 style="{{ h2Form }}">Payment</h2>
+                  </div>
+                  <div class="seg">
+                    <label class="seg-opt"><input type="radio" name="pay" defaultChecked="{{ true }}">Card</label>
+                    <label class="seg-opt"><input type="radio" name="pay">Bank transfer</label>
+                    <label class="seg-opt"><input type="radio" name="pay">Pay half now</label>
+                  </div>
+                  <div class="field"><label>Name on card</label><input class="input" value="Yosef Weiss" readOnly="{{ true }}"></div>
+                  <div class="field"><label>Card number</label><input class="input" value="4242 4242 4242 4242" readOnly="{{ true }}"></div>
+                  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:var(--space-3)">
+                    <div class="field"><label>Expiry</label><input class="input" value="04 / 29" readOnly="{{ true }}"></div>
+                    <div class="field"><label>CVC</label><input class="input" value="•••" readOnly="{{ true }}"></div>
+                    <div class="field"><label>Zip</label><input class="input" value="10952" readOnly="{{ true }}"></div>
+                  </div>
+                  <div class="field"><label>Billing address</label><input class="input" value="14 Grandview Ave, Monsey, NY 10952" readOnly="{{ true }}"></div>
+                  <label style="display:flex;gap:8px;align-items:flex-start;font-size:13px;cursor:pointer">
+                    <input type="checkbox" defaultChecked="{{ true }}" style="accent-color:var(--color-accent-600);margin-top:3px">
+                    <span>I agree to the guest terms, house rules and cancellation policy.</span>
+                  </label>
+                  <div style="display:flex;gap:var(--space-2);justify-content:space-between;padding-top:var(--space-2);border-top:1px solid var(--color-divider)">
+                    <button type="button" class="btn btn-secondary" onClick="{{ goBook1 }}">Back</button>
+                    <button type="button" class="btn btn-primary" onClick="{{ goBook3 }}" style="min-height:44px">Review booking</button>
+                  </div>
+                </div>
+              </sc-if>
+
+              <sc-if value="{{ isBook3 }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;flex-direction:column;gap:var(--space-3)">
+                  <div>
+                    <div class="card-kicker">Step 3 of 3</div>
+                    <h2 style="{{ h2Form }}">Review &amp; confirm</h2>
+                  </div>
+                  <sc-for list="{{ reviewRows }}" as="r" hint-placeholder-count="4">
+                    <div style="display:flex;justify-content:space-between;gap:var(--space-4);align-items:flex-start;padding-bottom:var(--space-2);border-bottom:1px solid var(--color-divider)">
+                      <div>
+                        <div style="font-size:11px;letter-spacing:0.07em;text-transform:uppercase;color:var(--color-neutral-600);margin-bottom:3px">{{ r.label }}</div>
+                        <div style="font-size:13px">{{ r.value }}</div>
+                      </div>
+                      <button type="button" class="btn btn-ghost" style="font-size:12px">Edit</button>
+                    </div>
+                  </sc-for>
+                  <div style="display:flex;justify-content:space-between;font-family:var(--font-heading);font-size:20px;font-variant-numeric:tabular-nums">
+                    <span>Total due today</span><span>$5,856</span>
+                  </div>
+                  <div style="display:flex;gap:var(--space-2);justify-content:space-between;padding-top:var(--space-2);border-top:1px solid var(--color-divider)">
+                    <button type="button" class="btn btn-secondary" onClick="{{ goBook2 }}">Back</button>
+                    <button type="button" class="btn btn-primary" onClick="{{ goConfirm }}" style="min-height:44px">Confirm &amp; pay $5,856</button>
+                  </div>
+                </div>
+              </sc-if>
+
+              <sc-if value="{{ isConfirm }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;flex-direction:column;gap:var(--space-3);text-align:center;align-items:center">
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-600)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8.5 12.5 11 15l4.5-5"/></svg>
+                  <div>
+                    <h2 style="{{ h2Form }}">You're booked for Shabbos.</h2>
+                    <p style="font-size:13px;color:var(--color-neutral-800);margin-top:7px">Confirmation KV-40318 · A calendar invite and the host's number are on their way to yweiss@example.com.</p>
+                  </div>
+                  <div style="width:100%;text-align:left;display:flex;flex-direction:column;gap:6px;padding:var(--space-3);border:1px solid var(--color-divider);border-radius:var(--radius-sm);font-size:13px;font-variant-numeric:tabular-nums">
+                    <div style="display:flex;justify-content:space-between"><span>Heichal Villa</span><span>South Fallsburg, NY</span></div>
+                    <div style="display:flex;justify-content:space-between"><span>Thu 12 Jan — Sun 15 Jan</span><span>3 nights</span></div>
+                    <div style="display:flex;justify-content:space-between"><span>18 guests</span><span>Shul walk 3 min</span></div>
+                    <div style="display:flex;justify-content:space-between;padding-top:6px;border-top:1px solid var(--color-divider)"><span>Paid</span><span>$5,856</span></div>
+                  </div>
+                  <p style="font-size:12px;color:var(--color-neutral-700);margin:0">Next: confirm kashering times with the host by 5 January.</p>
+                  <div style="display:flex;gap:var(--space-2);flex-wrap:wrap;justify-content:center">
+                    <button type="button" class="btn btn-secondary">Add to calendar</button>
+                    <button type="button" class="btn btn-primary" onClick="{{ goHome }}">Back to Kvation</button>
+                  </div>
+                </div>
+              </sc-if>
+            </div>
+
+            <aside style="{{ bookingAsideStyle }}">
+              <div class="card" style="background:var(--color-bg);gap:7px;padding:var(--space-3)">
+                <div class="plate" style="position:relative;border-radius:var(--radius-sm);background:var(--color-neutral-400);aspect-ratio:3/2;overflow:hidden">
+                  <image-slot id="kv-book-thumb" src="photos/kv-book-thumb.jpg" style="position:absolute;inset:0;width:100%;height:100%" shape="rounded" radius="4" fit="cover" placeholder="Photo"></image-slot>
+                </div>
+                <div class="card-kicker">South Fallsburg, NY</div>
+                <div style="font-family:var(--font-heading);font-size:17px;line-height:1.2">Heichal Villa</div>
+                <div style="font-size:11px;color:var(--color-neutral-700);font-variant-numeric:tabular-nums">26 guests · 9 bd · shul 3 min</div>
+                <div style="display:flex;flex-direction:column;gap:5px;font-size:12px;font-variant-numeric:tabular-nums;padding-top:var(--space-2);border-top:1px solid var(--color-divider)">
+                  <div style="display:flex;justify-content:space-between"><span>$1,700 × 3 nights</span><span>$5,100</span></div>
+                  <div style="display:flex;justify-content:space-between"><span>Cleaning</span><span>$450</span></div>
+                  <div style="display:flex;justify-content:space-between"><span>Service fee</span><span>$306</span></div>
+                  <div style="display:flex;justify-content:space-between;padding-top:6px;border-top:1px solid var(--color-divider);font-family:var(--font-heading);font-size:16px"><span>Total</span><span>$5,856</span></div>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+    </sc-if>
+
+    <!-- ══════════════════ HOST DASHBOARD ══════════════════ -->
+    <sc-if value="{{ isHost }}" hint-placeholder-val="{{ false }}">
+      <section style="{{ padX }}">
+        <div style="padding:var(--space-4) 0 var(--space-3);display:flex;align-items:flex-end;justify-content:space-between;gap:var(--space-3);flex-wrap:wrap">
+          <div>
+            <div class="card-kicker">Host</div>
+            <h1 style="{{ h1Prop }}">Good morning, Shaindy.</h1>
+          </div>
+          <div style="display:flex;gap:var(--space-2)">
+            <button type="button" class="btn btn-secondary" style="font-size:12px">Block dates</button>
+            <button type="button" class="btn btn-primary" style="font-size:12px">Add a listing</button>
+          </div>
+        </div>
+
+        <div style="{{ statGrid }}">
+          <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
+            <div style="border:1px solid var(--color-divider);border-radius:var(--radius-sm);padding:var(--space-3);display:flex;flex-direction:column;gap:2px">
+              <div class="card-kicker">{{ s.label }}</div>
+              <div style="font-family:var(--font-heading);font-size:27px;line-height:1.1;font-variant-numeric:tabular-nums">{{ s.value }}</div>
+              <div style="font-size:11px;color:var(--color-neutral-600)">{{ s.note }}</div>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="{{ hostLayout }}">
+          <div style="min-width:0">
+            <h3 style="{{ h3 }}">Upcoming bookings</h3>
+            <div style="overflow-x:auto">
+              <table class="table" style="font-variant-numeric:tabular-nums;min-width:470px;font-size:13px">
+                <thead><tr><th>Guest</th><th>Property</th><th>Dates</th><th>Guests</th><th>Payout</th><th>Status</th></tr></thead>
+                <tbody>
+                  <sc-for list="{{ bookings }}" as="b" hint-placeholder-count="5">
+                    <tr>
+                      <td>{{ b.guest }}</td><td>{{ b.property }}</td><td>{{ b.dates }}</td><td>{{ b.guests }}</td><td>{{ b.payout }}</td>
+                      <td><span style="{{ b.statusStyle }}">{{ b.status }}</span></td>
+                    </tr>
+                  </sc-for>
+                </tbody>
+              </table>
+            </div>
+
+            <h3 style="{{ h3 }}">My listings</h3>
+            <div style="display:flex;flex-direction:column;gap:var(--space-2)">
+              <sc-for list="{{ hostListings }}" as="l" hint-placeholder-count="3">
+                <div style="display:flex;align-items:center;gap:var(--space-3);border:1px solid var(--color-divider);border-radius:var(--radius-sm);padding:var(--space-2)">
+                  <div style="position:relative;width:80px;flex:none;border-radius:3px;background:var(--color-neutral-400);aspect-ratio:3/2;overflow:hidden">
+                    <image-slot id="{{ l.slotId }}" src="{{ l.photo }}" style="position:absolute;inset:0;width:100%;height:100%" shape="rounded" radius="3" fit="cover" placeholder=""></image-slot>
+                  </div>
+                  <div style="flex:1;min-width:0">
+                    <div style="font-family:var(--font-heading);font-size:16px">{{ l.name }}</div>
+                    <div style="font-size:11px;color:var(--color-neutral-700);font-variant-numeric:tabular-nums">{{ l.meta }}</div>
+                  </div>
+                  <span style="{{ l.statusStyle }}">{{ l.status }}</span>
+                  <button type="button" class="btn btn-ghost" style="font-size:12px">Edit</button>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <aside style="display:flex;flex-direction:column;gap:var(--space-2);padding-top:var(--space-4)">
+            <div style="{{ kosherFilterStyle }}">
+              <div style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-accent-800);margin-bottom:6px">Kashrus record</div>
+              <p style="font-size:12px;line-height:1.6;color:var(--color-neutral-800);margin:0 0 var(--space-2)">Heichal Villa's kitchen check is 11 months old. Guests filter on this — refresh it before the winter season opens.</p>
+              <button type="button" class="btn btn-primary" style="width:100%;font-size:12px">Update kashrus details</button>
+            </div>
+            <div style="border:1px solid var(--color-divider);border-radius:var(--radius-sm);padding:var(--space-3)">
+              <div class="card-kicker" style="margin-bottom:7px">Needs you</div>
+              <div style="font-size:12px;display:flex;flex-direction:column;gap:6px">
+                <div style="display:flex;justify-content:space-between;gap:var(--space-2)"><span>Messages</span><a href="#">3 unread</a></div>
+                <div style="display:flex;justify-content:space-between;gap:var(--space-2)"><span>Review requests</span><a href="#">2 pending</a></div>
+                <div style="display:flex;justify-content:space-between;gap:var(--space-2)"><span>Payout on hold</span><a href="#">$1,250</a></div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </sc-if>
+
+    <!-- ══════════════════ STYLE GUIDE ══════════════════ -->
+    <sc-if value="{{ isGuide }}" hint-placeholder-val="{{ false }}">
+      <section style="{{ padX }}">
+        <div style="padding:var(--space-4) 0 var(--space-3);max-width:62ch">
+          <div class="card-kicker">Design system</div>
+          <h1 style="{{ h1Prop }}">Kvation on Classical</h1>
+          <p style="text-align:justify;hyphens:auto;font-size:13px;line-height:1.7;color:var(--color-neutral-800)">Marketplace density on an editorial base. Interface type is small and tabular; Cormorant is reserved for listing names, prices and headings. Colour is stroke, not fill — the one exception is the kosher panel, the single tinted surface in the product.</p>
+        </div>
+
+        <hr class="hr">
+        <h3 style="{{ h3 }}">Colour</h3>
+        <div style="{{ swatchGrid }}">
+          <sc-for list="{{ swatches }}" as="c" hint-placeholder-count="12">
+            <div>
+              <div style="{{ c.chip }}"></div>
+              <div style="font-size:11px;margin-top:4px;font-variant-numeric:tabular-nums">{{ c.name }}</div>
+              <div style="font-size:10px;color:var(--color-neutral-600);font-variant-numeric:tabular-nums">{{ c.hex }}</div>
+            </div>
+          </sc-for>
+        </div>
+
+        <hr class="hr" style="margin-top:var(--space-6)">
+        <h3 style="{{ h3 }}">Type</h3>
+        <div style="display:flex;flex-direction:column;gap:var(--space-3);padding-bottom:var(--space-3)">
+          <sc-for list="{{ typeSpecs }}" as="t" hint-placeholder-count="6">
+            <div style="display:flex;gap:var(--space-4);align-items:baseline;flex-wrap:wrap;border-bottom:1px solid var(--color-divider);padding-bottom:var(--space-2)">
+              <span style="font-size:10px;width:150px;color:var(--color-neutral-600);flex:none">{{ t.spec }}</span>
+              <span style="{{ t.style }}">{{ t.sample }}</span>
+            </div>
+          </sc-for>
+        </div>
+
+        <h3 style="{{ h3 }}">Buttons &amp; tags</h3>
+        <div style="display:flex;flex-direction:column;gap:var(--space-2);padding-bottom:var(--space-3)">
+          <div style="display:flex;flex-wrap:wrap;gap:var(--space-2);align-items:center">
+            <button type="button" class="btn btn-primary">Book instantly</button>
+            <button type="button" class="btn btn-secondary">Message host</button>
+            <button type="button" class="btn btn-ghost">Edit</button>
+            <button type="button" class="btn btn-primary" disabled="disabled">Unavailable</button>
+            <button type="button" class="btn btn-icon btn-secondary" aria-label="Save">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.8 5.6a5 5 0 0 0-7.1 0L12 7.3l-1.7-1.7a5 5 0 1 0-7.1 7.1l8.8 8.8 8.8-8.8a5 5 0 0 0 0-7.1z"/></svg>
+            </button>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:5px">
+            <span class="tag tag-accent">Eruv</span>
+            <span class="tag tag-accent">Mehadrin kitchen</span>
+            <span class="tag tag-accent">Shul 3 min</span>
+            <span class="tag tag-neutral">Heated pool</span>
+            <span class="tag tag-outline">Group It</span>
+          </div>
+        </div>
+
+        <hr class="hr">
+        <h3 style="{{ h3 }}">Listing card</h3>
+        <p style="font-size:12px;color:var(--color-neutral-700);max-width:56ch;margin-top:0">Borderless — the photograph is the card. 3:2 crop, availability badge top-left, save top-right, then town, name, figures and price. No drop shadow.</p>
+        <div style="{{ tileGrid }}">
+          <sc-for list="{{ featured }}" as="p" hint-placeholder-count="3">
+            <div style="display:flex;flex-direction:column;gap:7px">
+              <div class="lshot" style="{{ p.shot }}">
+                <image-slot id="{{ p.guideSlotId }}" src="{{ p.photo }}" style="position:absolute;inset:0;width:100%;height:100%" shape="rounded" radius="4" fit="cover" placeholder="Drop a photo"></image-slot>
+                <span style="{{ p.badgeStyle }}">{{ p.badge }}</span>
+              </div>
+              <div style="font-family:var(--font-heading);font-size:17px;line-height:1.2">{{ p.name }}</div>
+              <div style="font-size:11px;color:var(--color-neutral-700);font-variant-numeric:tabular-nums">{{ p.figures }}</div>
+            </div>
+          </sc-for>
+        </div>
+
+        <hr class="hr" style="margin-top:var(--space-6)">
+        <h3 style="{{ h3 }}">The kosher panel</h3>
+        <p style="font-size:12px;color:var(--color-neutral-700);max-width:56ch;margin-top:0">The only filled surface in the product. Accent-100 ground, accent-300 hairlines, accent-900 headings — deep enough for body copy, unlike the raw accent.</p>
+        <div style="{{ kosherFilterStyle }}">
+          <div style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-accent-800);margin-bottom:8px">Kosher &amp; Shabbos</div>
+          <div style="display:flex;gap:8px;align-items:flex-start">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-700)" stroke-width="2.2" stroke-linecap="round" style="flex:none;margin-top:3px"><path d="M20 6 9 17l-5-5"/></svg>
+            <div>
+              <div style="font-family:var(--font-heading);font-size:15px;color:var(--color-accent-900)">Kashrus certification</div>
+              <div style="font-size:12px;color:var(--color-neutral-800);margin-top:2px">Kitchen kashered under the Sullivan County Vaad, re-checked each season.</div>
+            </div>
+          </div>
+        </div>
+        <div style="height:var(--space-6)"></div>
+      </section>
+    </sc-if>
+
+    <!-- ══ footer ══ -->
+    <footer style="{{ footerStyle }}">
+      <div style="{{ padX }}">
+        <div style="{{ footerGrid }}">
+          <div>
+            <div style="font-family:var(--font-heading);font-size:19px;margin-bottom:7px">Kvation</div>
+            <p style="font-size:11px;line-height:1.6;color:var(--color-neutral-700);max-width:32ch;margin:0">Kosher vacation rentals near shuls and mikvaos. Search by availability and location. Instantly book.</p>
+          </div>
+          <sc-for list="{{ footerCols }}" as="c" hint-placeholder-count="3">
+            <div style="display:flex;flex-direction:column;gap:5px">
+              <div style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-neutral-600);margin-bottom:2px">{{ c.head }}</div>
+              <sc-for list="{{ c.links }}" as="l" hint-placeholder-count="4">
+                <a href="#" style="font-size:12px">{{ l }}</a>
+              </sc-for>
+            </div>
+          </sc-for>
+        </div>
+        <p style="font-size:10px;font-style:italic;color:var(--color-neutral-700);margin:var(--space-3) 0 0;padding:var(--space-2) 0 var(--space-4);border-top:1px solid var(--color-divider)">Kosher verification is between hosts and guests. Kvation doesn't assure kashrus status. © 2026 Kvation. All rights reserved.</p>
+      </div>
+    </footer>
+
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;kosherEmphasis&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Tinted panel&quot;,&quot;Hairline only&quot;],&quot;default&quot;:&quot;Tinted panel&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Kosher treatment&quot;},&quot;searchMap&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Search&quot;},&quot;resultsColumns&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:3,&quot;min&quot;:2,&quot;max&quot;:4,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Search&quot;}}">
+class Component extends DCLogic {
+  state = { screen: 'home', mobile: false };
+
+  data = {
+    listings: [
+      { name: 'Heichal Villa', town: 'South Fallsburg, NY', g: 26, b: 9, s: 3, price: 1700, rating: '4.9 (12)', badge: 'Instant book', tags: ['Mehadrin kitchen', 'Shul 3 min', 'Eruv'] },
+      { name: 'Paddle Villa, Lake Front', town: 'Swan Lake, NY', g: 40, b: 11, s: 2, price: 1800, rating: '5.0 (1)', badge: 'Instant book', tags: ['Two kitchens', 'Shul 2 min'] },
+      { name: 'Sky Villa, Heated Pool', town: 'Monticello, NY', g: 15, b: 7, s: 1, price: 395, rating: '', badge: 'New', tags: ['Sukkah', 'Shul 1 min', 'Daily minyan'] },
+      { name: 'Zen Villa, Heated Pool', town: 'Hurleyville, NY', g: 16, b: 6, s: 5, price: 299, rating: '5.0 (3)', badge: '', tags: ['Eruv', 'Pesach setup'] },
+      { name: 'Zephira Estate, Pool', town: 'Woodridge, NY', g: 45, b: 14, s: 3, price: 1500, rating: '', badge: 'Group It', tags: ['Five units', 'Shul 3 min'] },
+      { name: 'Kavanah Villa', town: 'South Fallsburg, NY', g: 21, b: 7, s: 3, price: 635, rating: '', badge: 'Instant book', tags: ['Mikvah 6 min', 'Eruv'] },
+      { name: 'Trillium Villa, Heated Pool', town: 'Woodridge, NY', g: 16, b: 7, s: 7, price: 1000, rating: '', badge: '', tags: ['Shabbos generator'] },
+      { name: 'The Barton House', town: 'Liberty, NY', g: 14, b: 4, s: 17, price: 650, rating: '5.0 (2)', badge: '', tags: ['Blech & urn'] },
+      { name: 'Lago Villa #1, Lakeview', town: 'White Lake, NY', g: 14, b: 4, s: 1, price: 700, rating: '', badge: 'Instant book', tags: ['Shul 1 min', 'Lakefront'] },
+      { name: 'Maple House, Oversized Pool', town: 'Woodbourne, NY', g: 10, b: 3, s: 10, price: 385, rating: '4.7 (3)', badge: '', tags: ['Eruv'] },
+      { name: 'Dome + House, Sauna', town: 'Hurleyville, NY', g: 10, b: 4, s: 5, price: 375, rating: '5.0 (4)', badge: '', tags: ['Mehadrin kitchen'] },
+      { name: 'Bluestone Haven', town: 'Monticello, NY', g: 9, b: 4, s: 15, price: 350, rating: '', badge: 'New', tags: ['Pesach setup'] }
+    ],
+    locations: [
+      { name: 'South Fallsburg', count: '86 rentals' }, { name: 'Woodridge', count: '54 rentals' },
+      { name: 'Monticello', count: '71 rentals' }, { name: 'White Lake', count: '33 rentals' },
+      { name: 'Monsey', count: '47 rentals' }, { name: 'Miami Beach', count: '62 rentals' }
+    ],
+    promises: [
+      { title: 'Kashrus, in writing', body: 'Which rav or vaad kashered the kitchen, when it was last checked, whether meat and dairy are truly separate, and what the Pesach arrangement is. Recorded on the listing, not negotiated over WhatsApp.' },
+      { title: 'Measured walks', body: 'Minutes on foot to the nearest year-round minyan and to the mikvah — walked and timed, not estimated. Eruv boundaries are drawn on the map with the erev Shabbos status line linked.' },
+      { title: 'Shabbos ready', body: 'Blech, urn, hot plates, lamps, pre-set timers, keypads in Shabbos mode, generator. Photographed at intake so you know what is waiting when you pull in Friday afternoon.' }
+    ],
+    kosherFeatures: [
+      { title: 'Kashrus certification', detail: 'Kitchens kashered under Rabbi Y. Ostreicher, Sullivan County Vaad. Last checked 3 Sep 2026.' },
+      { title: 'Separate meat & dairy kitchens', detail: 'Two full kitchens, colour-coded, with double ovens and separate sinks in each.' },
+      { title: 'Shul walk — 3 minutes', detail: 'Bais Medrash Heichal Yosef. Year-round minyanim from 6:15am; Shabbos hashkama 7:30.' },
+      { title: 'Mikvah', detail: "Men's mikvah 6 minutes on foot. Women's mikvah 4 minutes by car, by appointment." },
+      { title: 'Inside the eruv', detail: 'South Fallsburg eruv, boundary drawn on the map. Erev Shabbos status line linked from your booking.' },
+      { title: 'Shabbos amenities', detail: 'Blech, two hot plates, 60-quart urn, Shabbos lamps in every bedroom, timers pre-set, keypads in Shabbos mode.' },
+      { title: 'Yom Tov & Pesach', detail: 'Full Pesach kashering available; separate Pesach dishes stored on site. Sukkah frame with schach in the garage.' },
+      { title: 'Shabbos generator', detail: 'Whole-house generator on automatic transfer — no switching, no timers to reset.' }
+    ],
+    amenities: ['Heated pool', 'Hot tub', 'Cedar sauna', 'Game room', 'Three washer/dryers', 'Central air', 'Fire pit', 'Playground', 'Four acres', 'Ping pong', 'EV charger', 'Parking for 12'],
+    rooms: [
+      { name: 'Main floor', beds: '2 bedrooms · 1 king, 2 queens' },
+      { name: 'Upper floor', beds: '5 bedrooms · 4 queens, 6 singles' },
+      { name: 'Lower level', beds: '2 bedrooms · 8 bunks, 1 queen' }
+    ],
+    reviews: [
+      { rating: '5.0', text: 'Everything on the listing was accurate, which after four years of Catskills rentals is not something we take for granted. The urn was full when we arrived.', by: 'Chana F. · Monsey · Sukkos 2025' },
+      { rating: '5.0', text: 'Twenty-six of us and nobody ate standing up. The second kitchen meant the dairy breakfast did not turn into a production.', by: 'Yosef W. · Lakewood · Shavuos 2026' },
+      { rating: '4.5', text: 'House was beautiful. Walk to shul is genuinely three minutes — I timed it with a stroller.', by: 'Dovid K. · Brooklyn · Pesach 2026' }
+    ],
+    stats: [
+      { label: 'Earnings, season to date', value: '$148,400', note: '+22% on last winter' },
+      { label: 'Confirmed bookings', value: '34', note: '6 awaiting kashrus confirmation' },
+      { label: 'Response rate', value: '98%', note: 'median 40 minutes' },
+      { label: 'Guest rating', value: '4.9', note: 'across 47 reviews' }
+    ],
+    bookings: [
+      { guest: 'Y. Weiss', property: 'Heichal Villa', dates: '12–15 Jan', guests: '18', payout: '$5,406', status: 'Confirmed' },
+      { guest: 'S. Brandt', property: 'Kavanah Villa', dates: '19–22 Jan', guests: '21', payout: '$1,905', status: 'Confirmed' },
+      { guest: 'M. Teitelbaum', property: 'Heichal Villa', dates: '2–9 Feb', guests: '24', payout: '$11,900', status: 'Pending' },
+      { guest: 'A. Gluck', property: 'Sky Villa', dates: '14–17 Feb', guests: '12', payout: '$1,185', status: 'Confirmed' },
+      { guest: 'R. Neuman', property: 'Kavanah Villa', dates: '1–8 Apr', guests: '20', payout: '$4,445', status: 'Enquiry' }
+    ],
+    hostListings: [
+      { name: 'Heichal Villa', meta: '26 guests · 9 bd · shul 3 min · $1,700/night', status: 'Live' },
+      { name: 'Kavanah Villa', meta: '21 guests · 7 bd · shul 3 min · $635/night', status: 'Live' },
+      { name: 'Sky Villa, Heated Pool', meta: '15 guests · 7 bd · shul 1 min · $395/night', status: 'Draft' }
+    ],
+    swatchList: [
+      ['Ground', '#f3f2f2'], ['Surface', '#eae9e9'], ['Ink', '#201f1d'], ['Accent', '#b68235'],
+      ['accent-100', '#fff3e4'], ['accent-300', '#facb8d'], ['accent-600', '#a06f24'], ['accent-900', '#3a270d'],
+      ['neutral-200', '#eae7e7'], ['neutral-400', '#bab6b6'], ['neutral-700', '#605d5d'], ['neutral-900', '#2d2b2b']
+    ]
+  };
+
+  go = k => () => { this.setState({ screen: k }); if (typeof window !== 'undefined') window.scrollTo(0, 0); };
+
+  pill(active) {
+    return 'font-family:var(--font-body);font-size:11px;cursor:pointer;padding:4px 10px;border-radius:var(--radius-sm);border:1px solid ' +
+      (active ? 'var(--color-accent-400);color:var(--color-accent-300);background:rgba(182,130,53,0.16)' : 'transparent;color:var(--color-neutral-400);background:transparent');
+  }
+
+  statusChip(s) {
+    const base = 'display:inline-flex;align-items:center;font-size:11px;padding:2px 9px;border-radius:3px;white-space:nowrap;';
+    if (s === 'Confirmed' || s === 'Live') return base + 'background:var(--color-accent-100);color:var(--color-accent-800)';
+    if (s === 'Enquiry') return base + 'border:1px solid var(--color-accent);color:var(--color-accent-700)';
+    return base + 'background:var(--color-neutral-200);color:var(--color-neutral-800)';
+  }
+
+  renderVals() {
+    const { screen: sc, mobile: m } = this.state;
+    const cols = this.props.resultsColumns ?? 3;
+    const tinted = (this.props.kosherEmphasis ?? 'Tinted panel') === 'Tinted panel';
+
+    const d = this.data;
+
+    const grid = (n, gap) => ({ display: 'grid', gridTemplateColumns: m ? '1fr' : 'repeat(' + n + ',minmax(0,1fr))', gap: gap || 'var(--space-3)' });
+
+    const shot = i => ({
+      position: 'relative', borderRadius: 'var(--radius-sm)', overflow: 'hidden',
+      background: 'var(--color-neutral-' + (i % 2 ? '300' : '400') + ')',
+      aspectRatio: '3/2', transition: 'filter 140ms ease'
+    });
+    const slug = n => n.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    const mk = (p, i) => ({
+      name: p.name, town: p.town, tags: p.tags,
+      slotId: 'kv-' + slug(p.name),
+      guideSlotId: 'kv-guide-' + slug(p.name),
+      slotHint: 'Drop a photo of ' + p.name,
+      photo: 'photos/kv-' + slug(p.name) + '.jpg',
+      figures: p.g + ' guests · ' + p.b + ' bd · shul ' + p.s + ' min',
+      price: '$' + p.price.toLocaleString(),
+      ratingLabel: p.rating ? p.rating + ' ★' : 'New listing',
+      badge: p.badge,
+      badgeStyle: p.badge
+        ? 'position:absolute;top:7px;left:7px;max-width:calc(100% - 46px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:10px;letter-spacing:0.04em;padding:3px 8px;border-radius:3px;background:rgba(243,242,242,0.93);color:var(--color-accent-800);border:1px solid var(--color-accent-300)'
+        : 'display:none',
+      shot: shot(i),
+      open: this.go('property')
+    });
+
+    const screens = [['home', 'Home'], ['search', 'Search'], ['property', 'Property'], ['book1', 'Book 1'], ['book2', 'Book 2'], ['book3', 'Book 3'], ['confirm', 'Confirmed'], ['host', 'Host'], ['guide', 'Style guide']];
+    const bookingIndex = { book1: 1, book2: 2, book3: 3, confirm: 3 }[sc] || 1;
+    const headH = m ? 54 : 79;
+
+    return {
+      isMobile: m, isDesktop: !m,
+      isHome: sc === 'home', isSearch: sc === 'search', isProperty: sc === 'property',
+      isBook1: sc === 'book1', isBook2: sc === 'book2', isBook3: sc === 'book3',
+      isConfirm: sc === 'confirm', isHost: sc === 'host', isGuide: sc === 'guide',
+      isBooking: ['book1', 'book2', 'book3', 'confirm'].includes(sc),
+      showBar: ['search', 'property'].includes(sc),
+
+      goHome: this.go('home'), goSearch: this.go('search'), goProperty: this.go('property'),
+      goBook1: this.go('book1'), goBook2: this.go('book2'), goBook3: this.go('book3'),
+      goConfirm: this.go('confirm'), goHost: this.go('host'),
+
+      navScreens: screens.map(([k, label]) => ({ label, select: this.go(k), style: this.pill(sc === k) })),
+      viewports: [['Desktop', false], ['Mobile', true]].map(([label, v]) => ({ label, select: () => this.setState({ mobile: v }), style: this.pill(m === v) })),
+
+      frameStyle: {
+        width: m ? '414px' : '100%', maxWidth: '100%', margin: '0 auto',
+        background: 'var(--color-bg)', boxShadow: m ? 'var(--shadow-md)' : 'none', minHeight: '80vh'
+      },
+      headerStyle: {
+        position: 'sticky', top: 0, zIndex: 30, display: 'flex', alignItems: 'center',
+        gap: 'var(--space-2)', padding: m ? '10px var(--space-4)' : '12px var(--space-6)', flexWrap: 'nowrap',
+        background: 'var(--color-bg)', borderBottom: '1px solid var(--color-divider)'
+      },
+      stickyBarStyle: {
+        position: 'sticky', top: headH, zIndex: 25, background: 'var(--color-bg)',
+        borderBottom: '1px solid var(--color-divider)', padding: m ? 'var(--space-2) var(--space-4)' : '10px var(--space-6)'
+      },
+      padX: { padding: m ? '0 var(--space-4)' : '0 var(--space-6)' },
+
+      heroWrap: { position: 'relative', margin: m ? '0' : '0', padding: 0 },
+      heroShot: {
+        position: 'relative', overflow: 'hidden', height: m ? '230px' : '380px', background: 'var(--color-neutral-400)',
+        borderBottom: '1px solid var(--color-divider)'
+      },
+      heroInner: {
+        position: m ? 'static' : 'relative', maxWidth: '1180px', margin: '0 auto',
+        padding: m ? 'var(--space-4)' : '0 var(--space-6)',
+        marginTop: m ? 0 : '-150px'
+      },
+      heroTitle: {
+        fontWeight: 400, fontSize: m ? '28px' : '40px', lineHeight: 1.1, margin: 0,
+        color: m ? 'var(--color-text)' : 'var(--color-neutral-100)',
+        textShadow: m ? 'none' : '0 1px 3px rgba(20,19,18,0.6)', maxWidth: '18ch'
+      },
+      heroScrim: {
+        position: 'absolute', inset: 0, pointerEvents: 'none',
+        display: m ? 'none' : 'block',
+        zIndex: 1,
+        background: 'linear-gradient(to top, rgba(26,25,23,0.82) 0%, rgba(26,25,23,0.62) 34%, rgba(26,25,23,0.22) 62%, rgba(26,25,23,0.06) 100%)'
+      },
+      heroSub: {
+        fontSize: m ? '13px' : '15px', margin: '7px 0 var(--space-3)',
+        color: m ? 'var(--color-neutral-700)' : '#f8f4f4',
+        textShadow: m ? 'none' : '0 1px 3px rgba(20,19,18,0.6)'
+      },
+      heroSearchCard: {
+        background: 'var(--color-bg)', border: '1px solid var(--color-divider)',
+        borderRadius: 'var(--radius-md)', padding: 'var(--space-3)',
+        display: 'flex', flexDirection: 'column', gap: 'var(--space-2)',
+        boxShadow: m ? 'none' : 'var(--shadow-md)'
+      },
+      searchBarGrid2: { display: 'grid', gridTemplateColumns: m ? '1fr' : '2fr 1.4fr 1fr auto', gap: 'var(--space-2)', alignItems: 'center' },
+      heroSearchGrid: { display: 'grid', gridTemplateColumns: m ? '1fr' : '1.5fr 1fr 1fr 1fr auto', gap: 'var(--space-2)', alignItems: 'end' },
+      heroSearchBtn: { height: '40px', padding: '0 24px', minHeight: m ? '46px' : '40px' },
+      trustStrip: {
+        display: 'grid', gridTemplateColumns: m ? '1fr 1fr' : 'repeat(4,1fr)', gap: 'var(--space-3)',
+        padding: m ? 'var(--space-3) var(--space-4)' : 'var(--space-4) var(--space-6)',
+        maxWidth: '1180px', margin: '0 auto', borderBottom: '1px solid var(--color-divider)'
+      },
+      rowHead: { display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: 'var(--space-3)', flexWrap: 'wrap', padding: 'var(--space-6) 0 var(--space-3)' },
+      h2: { fontWeight: 400, fontSize: m ? '22px' : '27px', margin: 0 },
+      h3: { fontWeight: 400, fontSize: m ? '19px' : '22px', margin: 'var(--space-4) 0 var(--space-2)' },
+      h1Search: { fontWeight: 400, fontSize: m ? '25px' : '31px', margin: 'var(--space-3) 0 0' },
+      h1Prop: { fontWeight: 400, fontSize: m ? '27px' : '35px', margin: 0 },
+      h2Form: { fontWeight: 400, fontSize: '25px', margin: '3px 0 0' },
+
+      featuredGrid: { display: 'grid', gridTemplateColumns: m ? '1fr' : 'repeat(auto-fill,minmax(215px,1fr))', gap: 'var(--space-3)' },
+      tileGrid: { display: 'grid', gridTemplateColumns: m ? '1fr' : 'repeat(auto-fill,minmax(230px,1fr))', gap: 'var(--space-3)' },
+      threeCol: grid(3, 'var(--space-4)'),
+      twoColWide: { display: 'grid', gridTemplateColumns: m ? '1fr' : 'minmax(0,1.5fr) minmax(0,1fr)', gap: 'var(--space-6)' },
+      searchLayout: {
+        display: 'grid',
+        gridTemplateColumns: m ? '1fr' : '206px minmax(0,1fr)',
+        gap: 'var(--space-4)', alignItems: 'start',
+        padding: m ? '0 var(--space-4) var(--space-4)' : '0 var(--space-6) var(--space-6)'
+      },
+      filterRail: { position: m ? 'static' : 'sticky', top: '108px', paddingTop: 'var(--space-4)' },
+      resultsGrid: { display: 'grid', gridTemplateColumns: m ? '1fr' : 'repeat(auto-fill,minmax(' + Math.round(880 / cols) + 'px,1fr))', gap: 'var(--space-3)', paddingTop: 'var(--space-3)' },
+      galleryGrid: { display: 'grid', gridTemplateColumns: m ? '1fr' : 'minmax(0,2fr) minmax(0,1fr)', gap: '7px' },
+      mainShot: { position: 'relative', borderRadius: 'var(--radius-sm)', background: 'var(--color-neutral-400)', aspectRatio: m ? '3/2' : '2/1', overflow: 'hidden' },
+      thumbStack: { display: 'grid', gridTemplateColumns: m ? 'repeat(4,1fr)' : '1fr 1fr', gap: '7px' },
+      detailLayout: { display: 'grid', gridTemplateColumns: m ? '1fr' : 'minmax(0,1fr) 310px', gap: 'var(--space-6)', alignItems: 'start' },
+      bookingLayout: { display: 'grid', gridTemplateColumns: m ? '1fr' : 'minmax(0,1fr) 280px', gap: 'var(--space-4)', alignItems: 'start' },
+      bookingAsideStyle: { position: m ? 'static' : 'sticky', top: '128px', paddingTop: m ? 'var(--space-3)' : 'var(--space-4)' },
+      amenityGrid: grid(3, '0 var(--space-6)'),
+      reviewGrid: grid(3),
+      kosherGrid: { display: 'grid', gridTemplateColumns: m ? '1fr' : '1fr 1fr', gap: 'var(--space-3) var(--space-6)', paddingTop: 'var(--space-3)' },
+      statGrid: grid(4),
+      hostLayout: { display: 'grid', gridTemplateColumns: m ? '1fr' : 'minmax(0,1fr) 270px', gap: 'var(--space-6)', alignItems: 'start' },
+      footerStyle: { background: 'var(--color-neutral-200)', borderTop: '1px solid var(--color-divider)', marginTop: 'var(--space-6)', paddingTop: 'var(--space-6)' },
+      footerGrid: { display: 'grid', gridTemplateColumns: m ? '1fr 1fr' : 'minmax(0,1.4fr) repeat(3,minmax(0,1fr))', gap: 'var(--space-4)' },
+      swatchGrid: { display: 'grid', gridTemplateColumns: m ? 'repeat(3,1fr)' : 'repeat(6,1fr)', gap: 'var(--space-2)' },
+
+      kosherPanelStyle: {
+        marginTop: 'var(--space-6)', padding: 'var(--space-4)', borderRadius: 'var(--radius-sm)',
+        background: tinted ? 'var(--color-accent-100)' : 'transparent',
+        border: '1px solid ' + (tinted ? 'var(--color-accent-300)' : 'var(--color-accent)')
+      },
+      kosherFilterStyle: {
+        padding: 'var(--space-3)', borderRadius: 'var(--radius-sm)',
+        background: tinted ? 'var(--color-accent-100)' : 'transparent',
+        border: '1px solid ' + (tinted ? 'var(--color-accent-300)' : 'var(--color-accent)')
+      },
+
+      featured: d.listings.slice(0, 8).map(mk),
+      listings: d.listings.map(mk),
+      locations: d.locations.map(l => ({ ...l, slotId: 'kv-loc-' + slug(l.name), photo: 'photos/kv-loc-' + slug(l.name) + '.jpg' })),
+      promises: d.promises,
+      quickFilters: ['Walk to shul', 'Two kitchens', 'Inside an eruv', 'Heated pool', 'Sleeps 20+'],
+      trust: [
+        { value: '412', label: 'verified rentals' },
+        { value: '9', label: 'Sullivan County towns' },
+        { value: '1 min', label: 'closest shul walk' },
+        { value: '4.9 ★', label: 'average guest rating' }
+      ],
+      thumbs: ['Dining room', 'Kitchen', 'Pool', 'Bedroom'].map(label => { const id = 'kv-prop-' + label.toLowerCase().replace(/ /g, '-'); return { label, slotId: id, photo: 'photos/' + id + '.jpg' }; }),
+      kosherFeatures: d.kosherFeatures,
+      kosherFilters: [
+        { label: 'Mehadrin kitchen', on: true }, { label: 'Walking distance to shul', on: true },
+        { label: 'Inside an eruv', on: true }, { label: 'Mikvah within 10 min', on: false },
+        { label: 'Separate meat & dairy', on: true }, { label: 'Pesach kashering', on: false },
+        { label: 'Sukkah provided', on: false }, { label: 'Shabbos generator', on: false }
+      ],
+      amenities: d.amenities,
+      rooms: d.rooms,
+      reviews: d.reviews,
+      stats: d.stats,
+      bookings: d.bookings.map(b => ({ ...b, statusStyle: this.statusChip(b.status) })),
+      hostListings: d.hostListings.map(l => ({ ...l, slotId: 'kv-host-' + slug(l.name), photo: 'photos/kv-host-' + slug(l.name) + '.jpg', statusStyle: this.statusChip(l.status) })),
+      pages: ['‹', '1', '2', '3', '›'].map(label => {
+        const on = label === '1';
+        return {
+          label,
+          style: 'min-width:30px;height:30px;padding:0 9px;font-family:var(--font-body);font-size:12px;cursor:pointer;border-radius:3px;font-variant-numeric:tabular-nums;border:1px solid ' +
+            (on ? 'var(--color-accent);color:var(--color-accent-800);background:var(--color-accent-100)' : 'var(--color-divider);color:var(--color-neutral-800);background:transparent')
+        };
+      }),
+      pins: [[18, 26], [34, 52], [55, 18], [62, 64], [74, 38], [44, 80]].map(([x, y], i) => ({
+        label: '$' + [1700, 395, 635, 299, 1500, 700][i],
+        style: 'position:absolute;left:' + x + '%;top:' + y + '%;transform:translate(-50%,-50%);font-size:10px;font-variant-numeric:tabular-nums;padding:3px 8px;border-radius:12px;white-space:nowrap;background:var(--color-bg);border:1px solid ' +
+          (i === 0 ? 'var(--color-accent);color:var(--color-accent-800)' : 'var(--color-neutral-400);color:var(--color-neutral-800)') + ';box-shadow:var(--shadow-sm)'
+      })),
+      reviewRows: [
+        { label: 'Property', value: 'Heichal Villa — South Fallsburg, NY' },
+        { label: 'Dates', value: 'Thu 12 Jan — Sun 15 Jan · 3 nights' },
+        { label: 'Guests', value: '10 adults, 8 children' },
+        { label: 'Payment', value: 'Visa ending 4242 · billed to Monsey, NY' }
+      ],
+      typeSpecs: [
+        { spec: 'Hero / 40 / Cormorant 400', sample: 'Kosher rentals near shuls', style: 'font-family:var(--font-heading);font-weight:400;font-size:40px;line-height:1' },
+        { spec: 'Page title / 31 / 400', sample: 'Catskills | Sullivan County', style: 'font-family:var(--font-heading);font-weight:400;font-size:31px' },
+        { spec: 'Section / 27 / 400', sample: 'Instantly bookable this winter', style: 'font-family:var(--font-heading);font-weight:400;font-size:27px' },
+        { spec: 'Listing name / 17 / 400', sample: 'Paddle Villa, Lake Front', style: 'font-family:var(--font-heading);font-weight:400;font-size:17px' },
+        { spec: 'Body / 14 / Lora', sample: 'Two complete kitchens and a dining room that seats twenty-six.', style: 'font-size:14px' },
+        { spec: 'Meta / 11 / tabular', sample: '26 guests · 9 bd · shul 3 min', style: 'font-size:11px;color:var(--color-neutral-700);font-variant-numeric:tabular-nums' }
+      ],
+      swatches: d.swatchList.map(([name, hex]) => ({ name, hex, chip: 'height:46px;border-radius:3px;border:1px solid var(--color-divider);background:' + hex })),
+      footerCols: [
+        { head: 'Explore', links: ['Locations', 'Retreats', 'Group It', 'Catering', 'Articles'] },
+        { head: 'Hosting', links: ['List a property', 'Host terms', 'Payouts', 'Host resources'] },
+        { head: 'Company', links: ['About', 'Contact', 'Privacy', 'Terms', 'Refund policy'] }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>
